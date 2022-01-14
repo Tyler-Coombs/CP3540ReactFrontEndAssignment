@@ -1,0 +1,23 @@
+[
+    {
+        "name" : "Dune", 
+        "date" : "",
+        "actors" : [],
+        "poster" : "url here",
+        "rating" : 5
+    },
+    {
+        "name" : "Call Me By Your Name", 
+        "date" : "",
+        "actors" : [],
+        "poster" : "url here",
+        "rating" : 5
+    },
+    {
+        "name" : "", 
+        "date" : "",
+        "actors" : [],
+        "poster" : "url here",
+        "rating" : 5
+    }
+]
