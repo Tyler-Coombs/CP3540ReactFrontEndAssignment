@@ -1,32 +1,20 @@
-import { useState, useEffect } from 'react';
+import React from 'react';
 import './App.css';
+import { Routes, Route } from "react-router-dom";
+import { Home, AddReview, Whoops404 } from "./pages";
 
 function App() {
-
-  const [movies, setMovies] = useState([]);
-
-  useEffect(() => {
-    fetch('./movies.json')
-      .then((response) => response.json())
-      .then(setMovies)
-  }, []);
-
   return (
     <div className="App">
-      <h1>Movie Reviews</h1>
-      { movies.map( movie => { return <Movie info={movie}></Movie>}) }
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="addreview" element={<AddReview />} />
+        <Route path="*" element={<Whoops404 />} />
+      </Routes>
     </div>
   );
 }
 
-function Movie(props) {
-  console.log(props);
-  return (
-    <>
-    <h2>{props.info.name}</h2>
-    <p>{ JSON.stringify(props.info) }</p>
-    </>
-  )
-}
+
 
 export default App;
