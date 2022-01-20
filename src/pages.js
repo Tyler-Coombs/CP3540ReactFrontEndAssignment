@@ -10,39 +10,51 @@ export function Home() {
       .then((response) => response.json())
       .then(setMovies)
     }, []);
+    console.log(movies);
+
+    function Movie( {name, date, actors, poster, rating, onRemove = f => f} ) {
+        return (
+          <>
+          <div>
+            <h2>{name}</h2>
+            <img 
+                src={process.env.PUBLIC_URL + poster} 
+                alt={name + " Movie Poster"}>
+            </img>
+            <h3>Release Date: {date}</h3>
+            <h3>Lead Actors: {(actors).join(", ")}</h3>
+            <h3>IMDB Rating: {rating} Stars</h3>
+            <button onClick={() => onRemove(name)}>Remove</button>
+          </div>
+          </>
+        );
+    }
+
+    function MovieList( { movies = [], onRemoveMovie = f => f}) {
+        if (!movies.length) return <div>No movies available.</div>;
+
+        return (
+            movies.map( movie => (
+                <Movie key={movie.name} {...movie} onRemove={onRemoveMovie} />
+            ))
+        )
+    }
 
     return (
         <>
             <Header />
-            { movies.map( (movie, i) => { return <Movie key={i} info={movie}></Movie>}) }
+            <MovieList 
+                movies={movies} 
+                onRemoveMovie={ name => {
+                const newMovies = movies.filter(movie => movie.name !== name);
+                setMovies(newMovies);
+            }} />
             <Footer year={new Date().getFullYear()}/>
         </>
     );
 }
 
-function Movie(props) {
-    return (
-      <>
-      <h2>{props.info.name}</h2>
-      <img 
-        src={process.env.PUBLIC_URL + props.info.poster} 
-        alt={props.info.name + " Movie Poster"}>
-      </img>
-      <h3>Release Date: {props.info.date}</h3>
-      <h3>Lead Actors: {(props.info.actors).join(", ")}</h3>
-      <h3>IMDB Rating: {props.info.rating} Stars</h3>
-      <button  >Remove</button>
-      </>
-    );
-}
-
-function removeMovie(props) {
-    
-}
-
 export function AddReview() {
-
-
 
     return (
         <>
@@ -67,7 +79,7 @@ export function AddReview() {
                 <label>Rating:<select name="rating">
                         <option value="1">1 star</option>
                         <option value="2">2 star</option>
-                        <option selected value="3">3 star</option>
+                        <option defaultValue="3">3 star</option>
                         <option value="4">4 star</option>
                         <option value="5">5 star</option>
                     </select></label>
