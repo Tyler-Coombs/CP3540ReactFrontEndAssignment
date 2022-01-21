@@ -1,3 +1,5 @@
+This objectives for this project were to create a working front end react app without styling. The following commands and instructions were provided by default with React.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
