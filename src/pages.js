@@ -67,11 +67,6 @@ export function AddReview({movies, setMovies}) {
             txtRating.current.value = 0;
         }
 
-        const onNewPoster = e => {
-            let newPoster = e.target.files[0]
-            setPoster(URL.createObjectURL(newPoster));
-        }
-
         return (
             <>
                 <form onSubmit={submit}>
@@ -86,7 +81,7 @@ export function AddReview({movies, setMovies}) {
                     </div>
                     <div>
                         <label>Movie Poster:<input type="file" accept=".png,.jfif,.jpg,.jpeg"
-                        onChange = {e => onNewPoster(e)} required /></label>
+                        onChange = {e => setPoster(URL.createObjectURL(e.target.files[0]))} required /></label>
                     </div>
                     <div>
                     <label>Rating:<input ref={txtRating} type="text" required/></label>
